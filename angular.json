@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "projects": {
+    "aoc2021": {
+      "projectType": "application",
+      "root": "apps/aoc2021",
+      "sourceRoot": "apps/aoc2021/src",
+      "prefix": "advent-of-code",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/aoc2021",
+            "index": "apps/aoc2021/src/index.html",
+            "main": "apps/aoc2021/src/main.ts",
+            "polyfills": "apps/aoc2021/src/polyfills.ts",
+            "tsConfig": "apps/aoc2021/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/aoc2021/src/favicon.ico",
+              "apps/aoc2021/src/assets",
+              {
+                "input": "libs/shared/data-access/inputs/src/lib/inputs",
+                "glob": "**/*",
+                "output": "assets/inputs"
+              }
+            ],
+            "styles": [
+              "apps/aoc2021/src/styles.scss",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-dark-indigo/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/aoc2021/src/environments/environment.ts",
+                  "with": "apps/aoc2021/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "aoc2021:build:production"
+            },
+            "development": {
+              "browserTarget": "aoc2021:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "aoc2021:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/aoc2021/src/**/*.ts",
+              "apps/aoc2021/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/aoc2021"],
+          "options": {
+            "jestConfig": "apps/aoc2021/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "aoc2021-day01": {
+      "projectType": "library",
+      "root": "libs/aoc2021/day01",
+      "sourceRoot": "libs/aoc2021/day01/src",
+      "prefix": "advent-of-code",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/aoc2021/day01"],
+          "options": {
+            "jestConfig": "libs/aoc2021/day01/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/aoc2021/day01/src/**/*.ts",
+              "libs/aoc2021/day01/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "aoc2021-e2e": {
+      "root": "apps/aoc2021-e2e",
+      "sourceRoot": "apps/aoc2021-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/aoc2021-e2e/cypress.json",
+            "devServerTarget": "aoc2021:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "aoc2021:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/aoc2021-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["aoc2021"]
+    },
+    "shared-data-access-inputs": {
+      "projectType": "library",
+      "root": "libs/shared/data-access/inputs",
+      "sourceRoot": "libs/shared/data-access/inputs/src",
+      "prefix": "advent-of-code",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/data-access/inputs"],
+          "options": {
+            "jestConfig": "libs/shared/data-access/inputs/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/data-access/inputs/src/**/*.ts",
+              "libs/shared/data-access/inputs/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    }
+  }
+}
